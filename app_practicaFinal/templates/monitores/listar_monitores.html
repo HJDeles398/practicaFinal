@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block titulo %}Monitores{% endblock %}
+
+{% block contenido %}
+    <h2>Listado de Monitores</h2>
+
+    <a href="{% url 'nuevo_monitor' %}">Crear Nuevo Monitor</a>
+
+    <ul>
+        {% for monitor in monitores %}
+            <li>
+                <a href="{% url 'detalle_monitor' monitor.id %}">{{ monitor.nombre }}</a>
+                - <a href="{% url 'editar_monitor' monitor.id %}">Editar</a>
+                - <a href="{% url 'eliminar_monitor' monitor.id %}">Eliminar</a>
+            </li>
+        {% empty %}
+            <li>No hay monitores registrados.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

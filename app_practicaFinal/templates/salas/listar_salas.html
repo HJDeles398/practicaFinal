@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block titulo %}Salas{% endblock %}
+
+{% block contenido %}
+    <h2>Listado de Salas</h2>
+
+    <a href="{% url 'nueva_sala' %}">Crear Nueva Sala</a>
+
+    <ul>
+        {% for sala in salas %}
+            <li>
+                <a href="{% url 'detalle_sala' sala.id %}">{{ sala.nombre }}</a> ({{ sala.ubicacion }})
+                - <a href="{% url 'editar_sala' sala.id %}">Editar</a>
+                - <a href="{% url 'eliminar_sala' sala.id %}">Eliminar</a>
+            </li>
+        {% empty %}
+            <li>No hay salas registradas.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

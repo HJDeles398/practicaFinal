@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalle del Monitor{% endblock %}
+
+{% block contenido %}
+    <h2>{{ monitor.nombre }}</h2>
+
+    <p>Especialización: {{ monitor.especializacion }}</p>
+    <p>Número de actividades: {{ monitor.numero_actividades }}</p>
+
+    <a href="{% url 'editar_monitor' monitor.id %}">Editar</a> |
+    <a href="{% url 'listar_monitores' %}">Volver al listado</a>
+{% endblock %}

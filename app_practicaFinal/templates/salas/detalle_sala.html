@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalle de la Sala{% endblock %}
+
+{% block contenido %}
+    <h2>{{ sala.nombre }}</h2>
+
+    <p>Capacidad: {{ sala.capacidad }}</p>
+    <p>Ubicación: {{ sala.ubicacion }}</p>
+    <p>Responsable: {{ sala.responsable.nombre }}</p>
+
+    <a href="{% url 'editar_sala' sala.id %}">Editar</a> |
+    <a href="{% url 'listar_salas' %}">Volver al listado</a>
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalle de Usuario{% endblock %}
+
+{% block contenido %}
+    <h2>{{ usuario.nombre }}</h2>
+
+    <p>Edad: {{ usuario.edad }}</p>
+    <p>Email: {{ usuario.email }}</p>
+    <p>Teléfono: {{ usuario.telefono }}</p>
+
+    <p><strong>Actividades inscritas:</strong>
+        {% for actividad in usuario.actividades.all %}
+            <a href="{% url 'detalle_actividad' actividad.id %}">{{ actividad.nombre }}</a>{% if not forloop.last %},
+        {% endif %}
+        {% empty %}
+            No está inscrito en ninguna actividad.
+        {% endfor %}
+    </p>
+
+    <a href="{% url 'editar_usuario' usuario.id %}">Editar</a> |
+    <a href="{% url 'listar_usuarios' %}">Volver al listado</a>
+{% endblock %}

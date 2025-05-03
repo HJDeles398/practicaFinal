@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block titulo %}Actividades{% endblock %}
+
+{% block contenido %}
+    <h2>Listado de Actividades</h2>
+
+    <a href="{% url 'nueva_actividad' %}">Crear Nueva Actividad</a>
+
+    <form method="get" action="{% url 'listar_actividades' %}" class="filtro-form">
+        <h3>Filtrar actividades</h3>
+        <label for="tipo">Tipo:</label>
+        <input type="text" name="tipo" id="tipo" value="{{ request.GET.tipo }}">
+
+        <label for="monitor">ID de Monitor:</label>
+        <input type="number" name="monitor" id="monitor" value="{{ request.GET.monitor }}">
+
+        <button type="submit">Filtrar</button>
+        <a href="{% url 'listar_actividades' %}">Limpiar filtros</a>
+    </form>
+
+    {% if tipo_filtrado %}
+        <p>Mostrando actividades de tipo: {{ tipo_filtrado }}</p>
+    {% endif %}
+    {% if monitor_filtrado %}
+        <p>Filtradas por monitor con ID: {{ monitor_filtrado }}</p>
+    {% endif %}
+
+    <ul>
+        {% for actividad in actividades %}
+            <li>
+                <a href="{% url 'detalle_actividad' actividad.id %}">{{ actividad.nombre }}</a>
+                - <a href="{% url 'editar_actividad' actividad.id %}">Editar</a>
+                - <a href="{% url 'eliminar_actividad' actividad.id %}">Eliminar</a>
+                - <a href="{% url 'listar_inscripciones' actividad.id %}">Inscripciones</a>
+            </li>
+        {% empty %}
+            <li>No hay actividades registradas.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

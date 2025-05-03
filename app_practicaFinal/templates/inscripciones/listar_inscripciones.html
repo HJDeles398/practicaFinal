@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titulo %}Usuarios inscritos{% endblock %}
+
+{% block contenido %}
+    <h2>Usuarios inscritos en "{{ actividad.nombre }}"</h2>
+
+    <a href="{% url 'inscribir_usuario' actividad.id %}">Inscribir nuevo usuario</a>
+
+    <ul>
+        {% for inscripcion in inscripciones %}
+            <li>
+                {{ inscripcion.usuario.nombre }}
+                - <a href="{% url 'cancelar_inscripcion' actividad.id inscripcion.usuario.id %}">Cancelar</a>
+            </li>
+        {% empty %}
+            <li>No hay usuarios inscritos.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'detalle_actividad' actividad.id %}">Volver a actividad</a>
+{% endblock %}

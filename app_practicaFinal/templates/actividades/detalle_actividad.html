@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block titulo %}Detalle de Actividad{% endblock %}
+
+{% block contenido %}
+    <h2>{{ actividad.nombre }}</h2>
+
+    <p>Descripción: {{ actividad.descripcion }}</p>
+    <p>Tipo: {{ actividad.tipo }}</p>
+    <p>Horario: {{ actividad.horario }}</p>
+    <p>Duración: {{ actividad.duracion }}</p>
+    <p>Plazas disponibles: {{ actividad.plazas_disponibles }}</p>
+
+    <p>Monitor:
+        <a href="{% url 'detalle_monitor' actividad.monitor.id %}">{{ actividad.monitor.nombre }}</a>
+    </p>
+
+    <p>Sala principal:
+        <a href="{% url 'detalle_sala' actividad.sala_principal.id %}">{{ actividad.sala_principal.nombre }}</a>
+    </p>
+
+    <p>Salas secundarias:
+        {% for sala in actividad.salas_secundarias.all %}
+            <a href="{% url 'detalle_sala' sala.id %}">{{ sala.nombre }}</a>{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            No hay salas secundarias asignadas.
+        {% endfor %}
+    </p>
+
+    <a href="{% url 'editar_actividad' actividad.id %}">Editar</a> |
+    <a href="{% url 'listar_actividades' %}">Volver al listado</a>
+{% endblock %}

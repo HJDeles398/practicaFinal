@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block titulo %}Eliminar{% endblock %}
+
+{% block contenido %}
+    <h2>¿Estás seguro de que quieres eliminar esta {{ tipo }}?</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Eliminar</button>
+        <a href="javascript:history.back()">Cancelar</a>
+    </form>
+{% endblock %}
