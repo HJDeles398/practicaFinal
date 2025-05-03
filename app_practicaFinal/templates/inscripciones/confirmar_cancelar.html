@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block titulo %}Cancelar inscripción{% endblock %}
+
+{% block contenido %}
+    <h2>¿Seguro que deseas cancelar la inscripción de {{ usuario.nombre }} en "{{ actividad.nombre }}"?</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sí, cancelar</button>
+        <a href="{% url 'listar_inscripciones' actividad.id %}">No, volver</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block titulo %}Inscribir usuario{% endblock %}
+
+{% block contenido %}
+    <h2>Inscribir usuario en "{{ actividad.nombre }}"</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="usuario_id">Selecciona un usuario:</label>
+        <select name="usuario_id" required>
+            {% for usuario in usuarios %}
+                <option value="{{ usuario.id }}">{{ usuario.nombre }} ({{ usuario.email }})</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Inscribir</button>
+    </form>
+
+    <a href="{% url 'listar_inscripciones' actividad.id %}">Volver al listado</a>
+{% endblock %}

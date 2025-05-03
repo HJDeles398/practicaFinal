@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block contenido %}
+    <h2>{{ titulo }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>{{ form.nombre.label_tag }} {{ form.nombre }}</p>
+        <p>{{ form.capacidad.label_tag }} {{ form.capacidad }}</p>
+        <p>{{ form.ubicacion.label_tag }} {{ form.ubicacion }}</p>
+        <p>{{ form.nombre_responsable.label_tag }} {{ form.nombre_responsable }}</p>
+
+        <input type="submit" value="Guardar">
+        <a href="javascript:history.back()">Cancelar</a>
+    </form>
+{% endblock %}
+ç
